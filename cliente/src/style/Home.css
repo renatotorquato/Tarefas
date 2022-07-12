@@ -1,0 +1,23 @@
+.home {
+    background-color:#e6eae5 ;
+    height: 100%;
+}
+
+.home h1 {
+    text-align: center;
+}
+
+.OBS {
+    display: flex;
+   align-items: inherit;
+    height: 20vh;
+    width: 100%;
+    border-Radius: 10px;
+    background-Color: #effaf3;
+    border-Color:rgb(162, 162, 162);
+    border:solid;
+}
+
+.OBS p {
+    margin: 15px;
+}
