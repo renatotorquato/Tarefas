@@ -1,11 +1,24 @@
 import { Table } from "@nextui-org/react";
 import ButtonComp from "./ButtonComp";
-import ButtonNewTask from "./ButtonNewTask";
+//import ButtonNewTask from "./ButtonNewTask";
 import React from "react";
+import { Button, Spacer } from "@nextui-org/react";
+import { useState } from "react";
+//import Axios from "axios";
+import Modal from "./tarefas/Modal";
 
 
+export default function Tasks(props) {
+  const [showElement, setShowElement] = useState(false)
+  const showOrHide = () => showElement? setShowElement(false):setShowElement(true);
+  
+ 
 
-export default function Tasks() {
+  // function handleClick(){
+  //   showOrHide()
+  //   Axios.post("http://localhost:3001/register");
+  // }
+
 
   return (
     
@@ -17,14 +30,25 @@ export default function Tasks() {
       aria-label="Example table with static content"
       css={{
         height: "auto",
-        minWidth: "100%",
-        
+        minWidth: "100%",  
       }}
     >
       <Table.Header>
         <Table.Column><strong>TAREFAS</strong></Table.Column>
         <Table.Column><strong>STATUS</strong></Table.Column>
-        <Table.Column> <ButtonNewTask /> </Table.Column>
+        <Table.Column> 
+          <> <Modal/>
+          
+          {/* <Button
+            onClick={showOrHide}
+            size="sm"
+            shadow color="primary"
+          >Nova</Button> */}
+            <Spacer
+              y={0.5} />
+            {showElement? <Modal/> : null}
+          </>
+     </Table.Column>
       </Table.Header>
       <Table.Body>
         <Table.Row key="1">
