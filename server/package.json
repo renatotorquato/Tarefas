@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev":"nodemon index.jsx",
+    "dev": "nodemon index.jsx",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -12,8 +12,17 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.19"
+  },
+  "dotenv": {
+    "whitelist": [
+      "HOST_EVE",
+      "USER_EVE",
+      "PASSWORD_EVE",
+      "DATABASE_EVE"
+    ]
   }
 }

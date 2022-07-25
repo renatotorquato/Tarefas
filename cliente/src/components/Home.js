@@ -1,8 +1,7 @@
 import React from "react";
 import "../style/Home.css";
-import Observation from "./Observation";
+//import Observation from "./Observation";
 import Tasks from "./Tasks";
-
 
 export default function Home() {
 
@@ -13,9 +12,7 @@ export default function Home() {
         <h1>Lista de Tarefas!</h1>
         <Tasks />
       </div>
-      <div className="OBS">
-        <Observation />
-      </div> 
+      
     </>
   );
 }

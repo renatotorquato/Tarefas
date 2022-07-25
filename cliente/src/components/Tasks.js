@@ -1,72 +1,68 @@
-import { Table } from "@nextui-org/react";
-import ButtonComp from "./ButtonComp";
-//import ButtonNewTask from "./ButtonNewTask";
 import React from "react";
-import { Button, Spacer } from "@nextui-org/react";
-import { useState } from "react";
-//import Axios from "axios";
+import { Table, Spacer } from "@nextui-org/react";
+import ButtonComp from "./ButtonComp";
+import { useEffect, useState } from "react";
+import Axios from "axios";
 import Modal from "./tarefas/Modal";
 
 
-export default function Tasks(props) {
-  const [showElement, setShowElement] = useState(false)
-  const showOrHide = () => showElement? setShowElement(false):setShowElement(true);
+
+export default function Tasks() {
+
+
+  const [listTask, setListTask] = useState();
   
- 
 
-  // function handleClick(){
-  //   showOrHide()
-  //   Axios.post("http://localhost:3001/register");
-  // }
-
+  useEffect(()=>{
+    Axios.get("http://localhost:3001/getData").then((response)=>{
+      setListTask(response.data)
+    });
+  },[])
 
   return (
-    
+    <>
     <Table
     lined
       headerLined
       shadow={false}
-      selectionMode="multiple"
-      aria-label="Example table with static content"
+      selectionMode="single"
+      aria-label="Lista de Tarefas"
       css={{
         height: "auto",
         minWidth: "100%",  
       }}
     >
-      <Table.Header>
-        <Table.Column><strong>TAREFAS</strong></Table.Column>
-        <Table.Column><strong>STATUS</strong></Table.Column>
-        <Table.Column> 
-          <> <Modal/>
-          
-          {/* <Button
-            onClick={showOrHide}
-            size="sm"
-            shadow color="primary"
-          >Nova</Button> */}
-            <Spacer
-              y={0.5} />
-            {showElement? <Modal/> : null}
-          </>
-     </Table.Column>
-      </Table.Header>
-      <Table.Body>
-        <Table.Row key="1">
-          <Table.Cell>Tarefa A</Table.Cell>
-          <Table.Cell>Completa</Table.Cell>
-          <Table.Cell> <ButtonComp /> </Table.Cell>
-        </Table.Row>
-        <Table.Row key="2">
-          <Table.Cell>Tarefa B</Table.Cell>
-          <Table.Cell>Em progresso</Table.Cell>
-          <Table.Cell><ButtonComp /></Table.Cell>
-        </Table.Row>
-        <Table.Row key="3">
-          <Table.Cell>Tarefa C</Table.Cell>
-          <Table.Cell>Em análise</Table.Cell>
-          <Table.Cell><ButtonComp /></Table.Cell>
-        </Table.Row>
-      </Table.Body>
+        <Table.Header>
+          <Table.Column><strong>TAREFAS</strong></Table.Column>
+          <Table.Column><strong>ATÉ A DATA:</strong></Table.Column>
+          <Table.Column><strong>ID</strong></Table.Column>
+          <Table.Column>
+            <> <Modal />
+
+              <Spacer
+                y={0.5} />
+            </>
+          </Table.Column>
+        </Table.Header>
+        <Table.Body>
+          {typeof listTask != "undefined" && listTask.map((value) => {
+            
+            return <Table.Row key={value.cod_task}>
+              <Table.Cell>{value.nome}</Table.Cell>
+              <Table.Cell>{value.data}</Table.Cell>
+              <Table.Cell>{value.cod_task}</Table.Cell>
+              <Table.Cell> <ButtonComp /> </Table.Cell>
+            </Table.Row>
+          })}
+        </Table.Body>
+        <Table.Pagination
+        shadow
+        noMargin
+        align="center"
+        rowsPerPage={3}
+        onPageChange={(page) => console.log({ page })}
+      />
     </Table>
+    </>
   );
 }

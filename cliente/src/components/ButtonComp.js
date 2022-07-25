@@ -1,5 +1,5 @@
 import { Button, Spacer } from "@nextui-org/react";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 
 
@@ -8,19 +8,14 @@ export default function ButtonComp() {
  
  const [isActive, setIsActve] = useState(false)
  
-function endTask () {
-  if(setIsActve(true)) {
-   //let btnColor = "primary";
-  }
- }
-  useEffect(()=>{
-
-  })
+function cheked(){
+  setIsActve(true)
+}
   
   return (
     <>
       <Button id="btn"
-        onClick={() => { endTask() }}
+      onClick={cheked}
         className="ButtonTask"
         size= "sm"
         shadow 
